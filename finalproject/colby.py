@@ -1,6 +1,6 @@
 #Front Menu
 
-choice = float(input("Choose what you want to see--\n\nType 1 <--Your status of immigration \nType 2 <--For legal assistance in your surrounding area \nType 3 <-- For food assist., financial assist., religous, and therapy \nType 4 <-- For advocacy and representation\n"))
+choice = int(input("Choose what you want to see--\n\nType 1 <--Your status of immigration \nType 2 <--For legal assistance in your surrounding area \nType 3 <-- For food assist., financial assist., religous, and therapy \nType 4 <-- For advocacy and representation\n"))
 while choice >0 or choice <5:
     
     if choice == 1:
