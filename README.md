@@ -2,10 +2,14 @@
 
 ## Team Members
 - Edward Goldstein
-- (add teammates here)
+- Philipo
+- Colby
+- Michael
 
 ## How to run the project
 
 Run the main program:
 
 python main.py
+or
+The all together program --
