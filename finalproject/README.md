@@ -7,6 +7,6 @@
 - Michael
 
 ## Program Flow Chart
-![Program Menu](README.jpg)
+![Program Menu](../README.jpg)
 
 
