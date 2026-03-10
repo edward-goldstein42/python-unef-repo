@@ -1,7 +1,6 @@
-# -*- coding: utf-8 -*-
+# -*- coding: Edward Goldstein *-
 """
-Assistance
-Advocacy groups
+Dictionary for advocacy groups, food assitance, legal, and faith based organizations
 
 """
 from collections import namedtuple
@@ -95,49 +94,5 @@ religious_help = {
         )
         }
 
-'''
 
-nap = False
-fap = True
-hungerfreewa = False
-
-food_assistance = namedtuple("food_assistance", ["program", "agency", "elligibility", "website"])
-food_help = {
-        "SNAP": food_assistance(
-            "Supplemental Nutrition Assistance Program", 
-            "US Department of Agriculture", 
-            "US Citizens or Qualified immigrant that meets residency, household income, and work requirements.",
-            "https://www.dshs.wa.gov/"
-            ),
- def display_program(program_key):
-    program = food_assistance.get(program_key)
-    if program:
-        print(f"\n=== {program_key} ===")
-        print(f"Program: {program.program}")
-        print(f"Agency: {program.agency}")
-        print(f"Elligibility: {program.elligibility}")
-        print(f"Elligibility: {program.website}")
-        
-        
-Program = namedtuple("Program", ["name", "description", "contact"])
-
-assistance_programs = {
-    "SNAP": Program(
-        "Supplemental Nutrition Assistance Program",
-        "Monthly food benefits for eligible households",
-        "https://www.dshs.wa.gov/esa/community-services-offices/snap"
-    ),
-    
-def display_program(program_key):
-
-    program = assistance_programs.get(program_key)
-
-    if program:
-        print(f"\n=== {program_key} ===")
-        print(f"Name: {program.name}")
-        print(f"Description: {program.description}")
-        print(f"Contact: {program.contact}")
-    else:
-        print("Program not found.")
-'''
 
