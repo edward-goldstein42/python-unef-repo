@@ -6,11 +6,6 @@
 - Colby
 - Michael
 
-## How to run the project
+## Program Flow Chart
+![Program Menu](README.JPG)
 
-Run the main program:
-
-python main.py
-or
-view full compiled program --
-Final.Program
