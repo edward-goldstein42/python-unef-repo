@@ -1,0 +1,67 @@
+#primary menu for choice selection
+
+from dictionary_data import lawfirms, advocacy_groups, religious_help
+#from eligibility import immigration_status
+from food_menu import run_food_menu
+
+
+
+
+def legal_info():
+
+    for legal_key, legal in lawfirms.items():
+
+        print(f"\n=== {legal_key} ===")
+        print(f"Lawfirm: {legal.lawfirm}")
+        print(f"Basic Info: {legal.description}")
+        print(f"Website: {legal.website}")
+
+
+def faithbased_info():
+
+    for faith_key, faith in religious_help.items():
+        print(f"\n=== {faith_key} ===")
+        print(f"Institution: {faith.institution}")
+        print(f"Address: {faith.address}")
+        print(f"Website: {faith.website}")
+
+
+def advocacy_info():
+    for advocate_key, advocate in advocacy_groups.items():
+        print(f"\n=== {advocate_key} ===")
+        print(f"Name of Organization: {advocate.name}")
+        print(f"Summary: {advocate.description}")
+        print(f"Website: {advocate.website}")
+        
+def food_assistance(immigration_eligibility):
+    run_food_menu(immigration_eligibility)
+    
+
+
+def help_menu(immigration_eligibility):
+    choice = 1
+#    status_menu(immigration_eligibility)
+    while choice >0:
+        choice = int(input(
+            "Choose what you want to see--\n\n"
+            "Type 1 <-- For legal assistance in your surrounding area\n"
+            "Type 2 <-- For faith based organizations\n"
+            "Type 3 <-- For advocacy groups\n"
+            "Type 4 <-- For food assistance\n"
+            "Type 0 <-- Exit\n"
+        ))
+
+        if choice == 1:
+            legal_info()
+        elif choice == 2:
+            faithbased_info()
+        elif choice == 3:
+            advocacy_info()
+        elif choice ==4:
+            food_assistance(immigration_eligibility)
+        elif choice == 0:
+            print("Goodbye")
+            break
+        else:
+            print("~ only options: 0-4 ~")
+
