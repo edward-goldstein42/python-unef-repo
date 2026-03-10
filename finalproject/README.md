@@ -7,5 +7,6 @@
 - Michael
 
 ## Program Flow Chart
-![Program Menu](README.JPG)
+![Program Menu](README.jpg)
+
 
