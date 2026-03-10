@@ -1,0 +1,312 @@
+
+from collections import namedtuple
+
+# _data structures for information_
+
+
+#advocacy groups
+
+AdvocacyGroup = namedtuple("AdvocacyGroup", ["name", "description", "website"])
+
+advocacy_groups = {
+    "NWIRP": AdvocacyGroup(
+        "Northwest Immigrant Rights Project",
+        "Provides legal assistance and advocacy for immigrants.",
+        "https://www.nwirp.org"
+    ),
+    "WAISN": AdvocacyGroup(
+        "Washington Immigrant Solidarity Network",
+        "Advocacy network supporting immigrant communities.",
+        "https://waisn.org"
+    ),
+    "ORIA": AdvocacyGroup(
+        "Washington State Office of Refugee and Immigrant Assistance",
+        "State office assisting refugees and immigrants.",
+        "https://www.dshs.wa.gov/oria"
+    )
+}
+
+#food programs
+FoodProgram = namedtuple("FoodProgram", ["program", "agency", "eligibility", "website"])
+
+food_help = {
+    "SNAP": FoodProgram(
+        "Supplemental Nutrition Assistance Program",
+        "US Department of Agriculture",
+        "US citizens or qualified immigrants meeting income/work rules",
+        "https://www.dshs.wa.gov/"
+    ),
+    "FAP": FoodProgram(
+        "Food Assistance Program",
+        "WA Department of Social and Health Services",
+        "Legal immigrants not eligible for SNAP",
+        "https://www.dshs.wa.gov/"
+    ),
+    "HungerFreeWA": FoodProgram(
+        "Hunger Free Washington",
+        "Non-Profit Organization",
+        "Community food programs available to many residents",
+        "https://www.hungerfreewa.org/"
+    )
+}
+
+#legal assistance
+LegalHelp = namedtuple("LegalHelp", ["lawfirm", "description", "website"])
+
+lawfirms = {
+    "Manifest": LegalHelp(
+        "Manifest Law",
+        "Technology-driven immigration legal services",
+        "https://manifestlaw.com/"
+    ),
+    "Gillin": LegalHelp(
+        "Gillin Law Group",
+        "Seattle based immigration law firm",
+        "https://gillinlaw.com/"
+    ),
+    "Rosche": LegalHelp(
+        "Rosche Immigration Law",
+        "Immigration legal services and consultations",
+        "https://www.roscheimmigrationlaw.com/"
+    )
+}
+
+#religious communal help
+
+ReligiousHelp = namedtuple("ReligiousHelp", ["institution", "address", "website"])
+
+religious_help = {
+    "EGM": ReligiousHelp(
+        "Everett Gospel Mission",
+        "3711 Smith Ave, Everett WA",
+        "https://egmission.org/"
+    ),
+    "Trinity": ReligiousHelp(
+        "Trinity Lutheran Church",
+        "2324 Lombard Ave, Everett WA",
+        "http://www.trinitylutheraneverett.com/"
+    ),
+    "Bilal": ReligiousHelp(
+        "Bilal Ibn Rabah Islamic Center",
+        "607 SE Everett Mall Way, Everett WA",
+        "https://bilalislamiccenter.com/"
+    )
+}
+
+
+#income 
+
+income_limits = {
+    1: 2608,
+    2: 3526,
+    3: 4442,
+    4: 5358,
+    5: 6276,
+    6: 7192,
+    7: 8108,
+    8: 9025
+}
+
+
+def income_check():
+
+    income = int(input("Enter household monthly income: "))
+    size = int(input("Enter household size: "))
+    work_req = input("Do you meet SNAP work requirements (y/n): ")
+
+    if size > 8:
+        print("Contact SNAP office for households larger than 8.")
+        return False
+
+    income_ok = income <= income_limits.get(size, 0)
+    work_ok = work_req.lower() == "y"
+
+    return income_ok and work_ok
+
+
+#status of immigration
+
+def immigration_status():
+
+    print("\nSelect Immigration Status")
+    print("1 F-1 Student")
+    print("2 Permanent Resident")
+    print("3 Refugee / Asylum")
+    print("4 Undocumented")
+    print("5 Work Visa")
+
+    choice = input("Enter choice: ")
+
+    snap = False
+    fap = False
+    hungerfree = False
+
+    if choice == "1":
+
+        print("F-1 students may work 20 hours on campus.")
+        hungerfree = True
+
+    elif choice == "2":
+
+        print("Green card holders can work anywhere.")
+        snap = True
+        fap = True
+
+    elif choice == "3":
+
+        print("Refugees may work legally.")
+        snap = True
+        fap = True
+
+    elif choice == "4":
+
+        print("Undocumented immigrants may use community resources.")
+        hungerfree = True
+
+    elif choice == "5":
+
+        print("Work visa holders work for sponsoring employer.")
+        hungerfree = True
+
+    return {
+        "SNAP": snap,
+        "FAP": fap,
+        "HungerFreeWA": hungerfree
+    }
+
+
+#resource display
+
+def show_advocacy():
+
+    print("\nAdvocacy Organizations\n")
+
+    for org in advocacy_groups.values():
+        print(org.name)
+        print(org.description)
+        print(org.website)
+        print()
+
+
+def show_legal():
+
+    print("\nLegal Assistance\n")
+
+    for firm in lawfirms.values():
+        print(firm.lawfirm)
+        print(firm.description)
+        print(firm.website)
+        print()
+
+
+def show_religious():
+
+    print("\nFaith Based & Community Help\n")
+
+    for place in religious_help.values():
+        print(place.institution)
+        print(place.address)
+        print(place.website)
+        print()
+
+
+#food assistance
+
+def food_assistance(eligibility):
+
+    for program, allowed in eligibility.items():
+
+        if program == "SNAP" and allowed:
+
+            if income_check():
+                info = food_help["SNAP"]
+                print(info.program, "-", info.website)
+
+        elif allowed:
+
+            info = food_help[program]
+            print(info.program, "-", info.website)
+
+
+#cost of living calc
+
+def cost_calculator():
+
+    print("\nCost of Living Calculator")
+
+    rent = float(input("Rent: "))
+    food = float(input("Food: "))
+    transport = float(input("Transport: "))
+    income = float(input("Income: "))
+
+    expenses = rent + food + transport
+    remaining = income - expenses
+
+    print("Total expenses:", expenses)
+    print("Remaining:", remaining)
+
+    if remaining > 0:
+        print("You have money remaining.")
+    else:
+        print("Expenses exceed income.")
+
+
+#main menu
+
+def main():
+
+    while True:
+
+        print("\n*==============================*")
+        print(" Everett Immigration Resource System")
+        print("==============================")
+        print("1 Immigration Status")
+        print("2 Legal Assistance")
+        print("3 Food Assistance Programs")
+        print("4 Advocacy Organizations")
+        print("5 Religious / Community Help")
+        print("6 Cost of Living Calculator")
+        print("7 Exit")
+
+        choice = input("Choose option: ")
+
+        if choice == "1":
+
+            eligibility = immigration_status()
+
+        elif choice == "2":
+
+            show_legal()
+
+        elif choice == "3":
+
+            try:
+                food_assistance(eligibility)
+            except:
+                print("Please select immigration status first.")
+
+        elif choice == "4":
+
+            show_advocacy()
+
+        elif choice == "5":
+
+            show_religious()
+
+        elif choice == "6":
+
+            cost_calculator()
+
+        elif choice == "7":
+
+            print("Thank you for using the Everett Immigration Resource System.")
+            break
+
+        else:
+            print("Invalid choice.")
+
+
+#end of code
+
+if __name__ == "__main__":
+    main()
